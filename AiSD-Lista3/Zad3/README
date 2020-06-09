@@ -1,0 +1,45 @@
+Zadanie 3.
+
+Przykładowe uruchomienie programu do przeszukiwania posortowanej listy 
+algorytmem wyszukiwania binarnego:
+
+python3 zad3.py
+
+Na wejściu należy podać posortowaną tablicę oraz wartość, jaką program
+ma odszukać. Jeśli ją znajdzie wyświetli 1, w przeciwnym przypadku 0.
+Program można również uruchomić z parametrem --stat:
+
+python3 zad3.py --stat
+
+Zostaną wtedy wygenerowane tablice wartości 1,2,3,...,n dla n {1000,2000,
+...,100000}, poszukiwaną wartością będzie n+1.
+Na ekranie bedą pojawiać się:
+
+n liczba_porownań czas
+
+dla kolejnych n. Dane te są również zapisywane do pliku bst.data. Po wygenerowaniu
+bst.data można uruchomić:
+
+python3 plot.py
+
+aby wyświetlić wykresy.
+
+Korzystając z Master Theorem dla rekurencji:
+
+T(n) = T(n/2) + O(1)
+
+oraz bazując na wykresach można odczytać, że złożność algorytmu jest O(log(n)).
+
+Stąd O(1) = O(log(n)) - O(log(n/2))
+
+Porównania:
+Szacowanie O(1) dla n ze zbioru {2000,20000,100000}
+O(1) = 2
+
+Co zgadza się przewidywaniami, ponieważ koszt zejścia do niższej części drzewa, to
+2 porównania - czy mamy szukany klucz i czy aktualna wartość jest mniejsza niż 
+klucz.
+
+Czas:
+Szacowanie O(1) dla n ze zbioru {2000,20000,100000}
+O(1) = 2*(10^(-5))s

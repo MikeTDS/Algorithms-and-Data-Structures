@@ -1,0 +1,48 @@
+Zadanie 1.
+
+W zadaniu 1. uzupełniłem rozwiązania z poprzedniej listy o algorytm
+Radix Sort. Przykładowe uruchomienie Radix Sorta:
+
+python3 zad1.py --comp '<=' --type radix
+
+Następnie należy podać rozmiar danych i dane do posortowania odzielone spacjami.
+
+Aby przetestować działanie algorytmu na większych danych {10,50,100,500,
+1000,5000,...,100000}, należy uruchomić program z parametrem --stat,
+przykładowo:
+
+python3 zad1.py --comp '<=' --type radix --stat radix.data 10
+
+Po --stat podawane są kolejno nazwa pliku docelowego oraz liczba powtórzeń
+dla każdego rozmiaru.
+
+Program zawiera też algorytmy z poprzedniej listy. W celu porównania
+danych różnych algorytmów należy po parametrze --type podać odpowiednio:
+
+quick/insert/merge/dp/hyb
+
+W celu porównania statystyk na wykresach, należy zebrać dane dla algorytmów:
+
+quick, merge, dp, hyb, radix
+
+w plikach o nazwach odpowiednio:
+
+quick.data, merge.data, dp.data, hyb.data, radix.data
+
+Następnie należy uruchomić:
+
+python3 plot.py
+
+Dane gotowe do rysowania wykresu znajdują się w katalogu 10 (10 prób na każdy 
+rozmiar) oraz same wykresy w formacie .png z i legenda. 
+
+Wnioski:
+
+Algorytm Radix Sort w testach wykonanych operacji oraz czasu działania wypada 
+najlepiej spośród zaimplementowanych wcześniej algorytmów. Odbywa się to jednak
+kosztem zużycia pamięci, ponieważ Radix Sort ma je zdecydowanie większe. 
+
+Wykonałem również testy na różnych zakresach danych. Wynika z nich, że
+Radix Sort ma złożoność O(n), a dokładniej O(d*n) dla danych z przedziału
+wielkości n^d. Oznacza to, że większy rząd wielkości danych wpływa
+negatywnie na działanie algorytmu.

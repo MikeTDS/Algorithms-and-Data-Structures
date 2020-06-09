@@ -1,0 +1,63 @@
+Zadanie 2.
+
+W zadaniu 2. zaimplementowałem algorytmy Randomized Select oraz Select.
+Program można uruchomić z parametrem -r (losowe dane) lub -p (permutacja).
+Przykładowe uruchomienie:
+
+python3 zad2.py -p
+
+Następnie należy podać rozmiar danych n do przeszukania oraz poszukiwaną
+statystykę pozycyjną k. Na stderr zostanie wypisana wylosowana tablica,
+wybrane k, następnie pokaże się nazwa algorytmu oraz log z
+przeprowadzanych operacji (pivot, porównania, przestawienia).
+Na końcu wypisze się podsumowanie łącznej ilości porównań i przestawień
+dla obu algorytmów. Na stdout pojawi się tablica z zaznaczoną k
+statystyką pozycyjną.
+
+Przeszukiwanie odbywa się na kopiach wylosowanej tablicy. Po zakończeniu pracy,
+sprawdzana jest poprawność wyniku, tzn. czy statyski pozycyjne dla Randomized 
+Select oraz Select są takie same. Gdyby tak nie było, program zostaje przerwany.
+
+Wnioski:
+
+Dla przeprowadzanych testów Randomized Select okazywał się korzystniejszy pod
+względem liczby wykonywanych operacji od Select. Wynika to z tego, że dla 
+Randomized Select operacje porównań i przestawień odbywają się jedynie
+na etapie partycji. W Selecie dodatkowo używany jest Insertion Sort.
+Po wykonaniu wielu testów okazuje się, że w najgorszym przypadku Randomized
+Select może mieć złożonośc O(n^2), gdy często będzie zachodził mniej korzystny 
+dobór pivota. W Selecie złożonść to O(n) w najgorszym przypadku. Wynika to 
+z lepszego doboru pivota (z mediany median) niż losowanie.
+
+Dodatkowo w programie zaimplementowałem możliwość zliczania średniej i 
+standardowego odchylenia dla wybranej liczby prób. Po parametrze -p lub -r
+należy dodać parametr --stat oraz liczbę prób. Uruchomienie:
+
+python3 zad2.py -p --stat 10
+
+Dla takich danych program wylosuje 10 razy tablicę podanego na wejściu
+rozmiaru i znajdzie k statystykę pozycyjną. Na samym końcu zostanie podana 
+średnia i odchylenie standardowe.
+
+Przykładowo uruchomiłem program:
+
+python3 zad2.py -p --stat 10
+n: 5000
+k: 3800
+
+i otrzymałem średnią liczbę porównań:
+
+Randomized Select: 14881.0
+Select: 42205.7
+
+oraz odchylenie:
+
+Randomized Select: 6289.85
+Select: 1002.28
+
+Jak widać średnie wyniki Randomized Select są lepsze, ale większe odchylenie
+świadczy o ich większym zakresie. Otrzymane dane zgadzają się z wcześniejszymi 
+obserwacjami, tzn. Randomized Select jak i Select posiadają średnio złożoność O(n), 
+gdzie Select ma większy współczynnik przy n, natomiast w najgorszym przypadku 
+Select nadal ma złożonść O(n), a Randomized Select O(n^2).
+

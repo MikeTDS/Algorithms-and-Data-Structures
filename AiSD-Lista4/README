@@ -1,0 +1,7 @@
+W katalogu PROGRAMS znajdują się rozwiązania zadań z listy 4. Jest tam również
+plik README z informacjami o uruchamianiu, danymi i wnioskami z pomiarów.
+
+W katalogu TESTS znajdują się dodatkowe kody źródłowe testów, które przeprowadzałem.
+Wszelkie informacje znajdują się w TESTS/README.
+
+W katalogu DATA znajdują się przykładowe dane z testów.

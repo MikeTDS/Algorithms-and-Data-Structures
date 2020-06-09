@@ -1,0 +1,198 @@
+Zadanie 1.
+
+Zgodnie z poleceniem zadania 1 zaimplementowałem 3 struktury danych: 
+drzewo przeszukiwan binarnych, drzewo czerowno czarne oraz tablicę
+hashującą z metodą łańcuchową. Program uruchamia się podając odpowiednią
+strukturę jako parametr oraz podając na standardowe wejście plik. 
+Przykładowo wybierając strukturę BST oraz plik input:
+
+python3 zad1.py --type bst <input
+
+Odpowiednio dla RBT i HMAP:
+
+python3 zad1.py --type rbt <input
+
+python3 zad1.py --type hmap <input
+
+Na standardowe wyjście zostaną wypisane rezultaty operacji podanych
+w pliku input. Na standardowe wyjście błędów zostaną wypisane 
+statystyki dotyczące przeprowadzanych operacji. Zarówno jedne i drugie
+dane zostaną wypisane zgodnie z treścią polecenia zadania 1, tzn.
+dla pliku input oraz sample.txt (takich jak na liście 1) otrzymuję:
+
+a aaa ab b 
+ab
+1
+1
+1
+0
+First
+time: 0.0013451576232910156s
+insert: 59
+load: 1
+delete: 4
+find: 4
+min: 1
+max: 2
+successor: 0
+inorder: 1
+max elements: 57
+current elements: 55
+
+Od pustej linii aż do słowa 'First' wypisane są wyniki operacji.
+UWAGA: w ostatniej linii na stdout jest słowo 'First' a nie 'aaa', jak to
+miało miejsce w przykładzie. Wynika to z faktu, że jako porządek przyjąłem
+taki sam jak w tablicy ASCII (najpierw duże litery, potem małe) oraz w 
+słowniku zamieszczonym na liście.
+Następnie na stderr jest wypisany kolejno czas działania programu,
+nazwa operacji oraz jej liczba wykonań, maksymalna liczba elementów w strukturze,
+aktualna liczba elementów w strukturze (po wykonaniu wszystkich operacji).
+UWAGA: w przypadku statystyk do insert czy delete liczone jest każdorazowe
+wywołanie funkcji (np. każdy insert dla load), nawet gdy nie wnosi żadnej
+zmiany w strukturze, np. klucz do usunięcia nie istnieje.
+
+W przypadku tablicy hashującej należało samodzielnie ustalić parametr nt, od 
+którego w danej komórce lista zostanie przekształcona w drzewo. W programie 
+testującym sprawdziłem średni czas dostępu do elementu w liście i rbt o tym 
+samym rozmiarze. Rozpocząłem od rozmiaru 10 i zwiekszałem go stopniowo o 10. 
+Wyszukiwałem 1/5 losowych elementów w strukturach i sprawdzałem kiedy czas 
+dla rbt będzie korzystaniejszy niż dla listy. Po wielu pomiarach okazało się, że 
+jest to około 50 elementów.
+
+Przeprowadziłem również testy wyznaczające średni czas działania każdej z operacji.
+Testy wykonywałem na różnych wielkościach danych. Przykładowo pokaże wyniki dla
+rozmiaru danych 300000 oraz liczbie elementów do odszukania 50000. Najpierw wszystkie
+elementy dodawałem do listy. Następnie wykonywałem pozostałe operacje, delete na samym
+końcu. Dla operacji podstawowych (insert, delete, find) otrzymałem następujące czasy:
+
+Average time in seconds
+Insert: 
+BST: 1.367609977722168e-05
+RBT: 1.8897729714711506e-05
+HMAP: 2.259815216064453e-05
+Find: 
+BST: 4.205452601114909e-06
+RBT: 3.2739965120951336e-06
+HMAP: 2.054142951965332e-06
+Delete: 
+BST: 2.406829039255778e-05
+RBT: 2.2317617734273276e-05
+HMAP: 2.2111932436625164e-05
+
+Jak można zauważyć w przypadku procedury insert nieznaczną przewagę ma BST. 
+Wraz ze wzrostem wielkości struktury ta przewaga jednak maleje. Znaczną różnicę widać
+w przypadku dostępu do elementu (find). Drzewo RBT dzięki lepszemu rozłożeniu elementów
+w wypada znacznie lepiej od BST. Podobnie tablica hashująca, która ma stały czas dostępu
+do komórki, a w przypadku dużej ilości elementów również korzysta z RBT. W przypadku
+delete znów lepiej wypada RBT i HMAP. Czasy te są jednak zbliżone, ponieważ czas, który
+RBT i HMAP zyskują na szybszym znalezieniu elementu, zostaje przedłużony o konieczność
+naprawy stuktury po procedurze delete.
+
+Dodatkowo dla BST i RBT umieszczam czasy dla pozostałych procedur (dla których HMAP wypisuje 
+pustą linię):
+
+Min: 
+BST: 1.0013580322265625e-05
+RBT: 1.0251998901367188e-05
+Max: 
+BST: 6.198883056640625e-06
+RBT: 7.059906005859375e-06
+Successor: 
+BST: 4.345806439717611e-06
+RBT: 3.58932892481486e-06
+Inorder: 
+BST: 0.41263794898986816
+RBT: 0.46601223945617676
+
+Successor daje podobne wyniki jak procedura find, ponieważ do znalezienia węzła o danym kluczu,
+wykonuje podobne operacje. Szukanie następnika samego węzła trwa zbliżoną ilość czasu w obu
+przypadkach. Operacje min i max w dużej mierze zależą od przypadku, stąd aby móc sensownie 
+przeprowadzić eksperyment, należy przetestować wiele drzew. Powyższe wyniki dotyczą tylko 
+jednego przypadku, natomiast przeprowadziłem dodatkowo testy dla rozmiarów 
+{5000,10000,15000,...,100000}:
+
+Min: 
+BST: 5.747245788574219e-06
+RBT: 5.3763389587402345e-06
+Max: 
+BST: 6.763120269775391e-06
+RBT: 6.866455078125e-06
+
+Ponownie można zauważyć, że czasy są bardzo zbliżone, trochę lepiej wypada RBT.
+Procedura inorder w obu przypadkach zajmuje podobną ilość czasu.
+
+
+Zadanie 2.
+
+Zgodnie z treścią należało przeprowdzić testy szacujące dolne i górne ograniczenie liczby porównań
+procedury find oraz średnią. Poniżej umieszczam wyniki pomiarów dla 20000 wstawionych elementów oraz
+100 losowych wyszukiwanych. Testy przeprowadziłem dla pliku slownik.txt (bez powtórzeń) oraz dla książki 
+Hobbit w pliku txt1 (z powtórzeniami).
+
+slownik: 
+BST min:81
+BST avg:7747.4
+BST max:15361
+RBT min:25
+RBT avg:25.96
+RBT max:27
+HMAP min:1
+HMAP avg:4.9
+HMAP max:14
+
+hobbit: 
+BST min:7
+BST avg:28.66
+BST max:65
+RBT min:3
+RBT avg:17.86
+RBT max:35
+HMAP min:0
+HMAP avg:1.63
+HMAP max:19
+
+W przypadku BST widać największą różnicę. Wczytując słownik wyraz po wyrazie w zadanej kolejności otrzymałem
+w istocie listę (drzewo zdegenrowało się do 1 gałęzi). Stąd średnia liczba porównań to ponad 7747, gdzie przy
+losowym rozłożeniu elementów (oraz powtórzeniach) spada znacząco do niecałych 29. W RBT nie ma tak dużej 
+różnicy, ponieważ drzewo dostosowuje swoje ustawienia zgodnie z elementami, które dostaje. Korzystniej wypada 
+jednak wariant z powtórzeniami, ponieważ procedura find znajduje jedynie pierwszy węzeł o zadanym kluczu. 
+Co za tym idzie, w przypadku wielu węzłów o zadanym kluczu znajdzie ten, do którego ma najbliżej (czyli 
+najszybciej). W tablicy hashującej sytuacja jest najlepsza, ponieważ dostęp do danej komórki nie wymaga 
+żadnych porównań (stąd nierzadko pojawi się min=0) a w przypadku większej ilości elementów w komórce 
+przeszukiwane jest (również korzystne) drzewo RBT. W każdym z przypadków lepsze wyniki otrzymamy dla danych 
+z powtórzeniami. Najlpiej wypada tablica hashująca oraz RBT, najsłabiej BST.
+
+Minimalna liczba porównań możliwa do otrzymania w RBT i BST wynosi 1, kiedy szukana wartość jest w korzeniu 
+(sprawdzamy czy root.key == szukany_klucz). W tablicy hashującej można wykonać 0 porównań międz kluczami, 
+przykładowo w komórce o indeksie hash(klucz) rozmiar danych wynosi 1. 
+Maksymalnie w BST można wykonać O(n) porównań (kiedy drzewo degeneruje się do 1 gałęzi), w RBT O(log(n)), 
+ponieważ maksymalna wysokość RBT to 2*log(n+1). W tablicy hashującej zależy to od ilości komórek oraz sposobu 
+przechowywania wartości w komórce. Zakładając, że wszystkie wartości przechowujemy w 1 komórce oraz ilość 
+danych > nt mamy O(log(n)), jak w RBT. Przy odpowiednim doborze liczby komórek oraz nt otrzymane dane powinny 
+być jednak o wiele korzystniejsze niż w RBT (tak jak w przykładowych pomiarach wyżej).
+
+
+Zadanie 3.
+
+W zadaniu 3 rozszerzyłem program z zadania 1 o filtr Bloom'a. Uruchomienie:
+
+python3 zad1.py --type bloom <input
+
+Zgodnie z treścią zaimplementowane są insert, find oraz load. W przypadku pozostałych zliczane są tylko ich wywłoania
+(w statystykach na stderr). Statystyka current elements zawiera liczbę dodanych do struktury elementów, natomiast
+max elements, liczbę elementów w tablicy bitów zajętą przez 1.
+
+Testy przeprowadziłem dla różnych rodzajów danych, modyfikując najpierw m, potem k. Szukając najlepszego rozwiązania
+okazało się, że:
+
+W zależności od rozmiaru danych konieczne jest dostosowanie parametru m odpowiadającego za rozmiar tablicy.
+Aby zmniejszyć prawdopodbieństwo niepoprawnych wyników m musi być dostatecznie duże. Liczbę funkcji hashujących
+również należy dobrać dla danego przypadku. Większe k pozwala lepiej wykluczyć istnienie elementu w tablicy, stąd
+do pewnego momentu warto je zwiększać.
+Postanowiłem dokładniej wyznaczyć najlepszą wartość dla k. Za i przyjąłem liczbę elementów wstawianych do tablicy, za
+m długość listy. Dla stosunku m/i zacząłem szukać takiego alfa, że alfa*(m/i) = k. Okazało się, że alfa to około 0.7.
+
+
+
+
+

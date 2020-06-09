@@ -1,0 +1,24 @@
+Zadanie 4.
+
+W tym zadaniu porównałem działanie standardowego quick sorta i dual-pivot quick sorta
+z ich odpowiednikami z zaimplementowanym algortmem select. W 2 ostatnich pivoty nie
+są zależne od indeksów ani losowe, natomiast wybierane z mediany median. Program po 
+uruchomieniu wygeneruje tablice o rozmiarze n ze zbioru {100,200,...,10000} (10 prób
+na każdy rozmiar) i każdym z 4 algorytmów posortuje jej kopie. 
+Do pliku alg.data zostaną zapisane dane, które można wyświetlić na wykresach za pomocą 
+plot.py. Uruchomienie:
+
+python3 zad4.py
+
+następnie po zakończeniu i zapisaniu danych do pliku można wyświetlić:
+
+python3 plot.py
+
+W folderze znajduje się już gotowy plik alg.data. W przypadku uruchomienia zad4.py
+zostanie on nadpisany.
+
+Wnioski:
+
+Standardowe odmiany quicksort oraz dual pivot quick sort mają średnio mniejszą złożoność 
+od ich odpowiedników z zaimplementowanym selectem. Z drugiej strony algorytmy z 
+zaimplementowanym selectem mają lepszą złożność w przypadkach najgorszych (worst case).

@@ -1,0 +1,21 @@
+1. W katalogu znajdują się programy, których używałem do sprawdzania poprawności
+rozwiązań oraz szacowania złożności (zgodnie z poleceniami zadań). Są to pliki:
+- test_nt.py na podstawie którego oszacowałem nt w HMAP
+- test_trees.py w pierwotnej fazie implementacji sprawdzał, czy BST i RBT są dobrze
+napisane
+- avg_time.py sprawdza średni czas dzialania operacji w strukturze
+- tests_zad2.py to program realizujący testy do zadania 2
+
+2. Pliki umieszczam w celu potwierdzenia, że dane, które znajdują się w katalogu
+DATA oraz PROGRAMS/README są prawdziwymi wynikami testów i same testy miały miejsce.
+
+3.Każdy z ww testów można uruchomić:
+
+python3 nazwa_pliku
+
+UWAGA: programy te służyły do testów, stąd mogą długo się wykonywać. Wielkość danych
+starałem się dobierać tak, aby wyniki były rzetelne.
+
+4.Ponieważ programy te mają charakter roboczy i nie stanowią samego rozwiązania, a 
+są jedynie środkiem do jego otrzymania, wszelkie zmiany parametrów dokonywane były
+ręcznie w kodzie. Stąd żaden z programów nie przyjmuje dodatkowych parametrów.

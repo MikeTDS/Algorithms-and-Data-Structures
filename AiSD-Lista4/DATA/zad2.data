@@ -1,0 +1,21 @@
+slownik: 
+BST min:81
+BST avg:7747.4
+BST max:15361
+RBT min:25
+RBT avg:25.96
+RBT max:27
+HMAP min:1
+HMAP avg:4.9
+HMAP max:14
+
+hobbit: 
+BST min:7
+BST avg:28.66
+BST max:65
+RBT min:3
+RBT avg:17.86
+RBT max:35
+HMAP min:0
+HMAP avg:1.63
+HMAP max:19
